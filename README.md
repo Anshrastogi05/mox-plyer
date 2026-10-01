@@ -190,8 +190,6 @@ Several animated UI primitives in `src/components/ui/` are adapted from [Acetern
 **Ansh Rastogi**
 
 - GitHub: [@Anshrastogi05](https://github.com/Anshrastogi05)
-- LinkedIn: _add your link here_
-- Portfolio: _add your link here_
 
 ---
 
