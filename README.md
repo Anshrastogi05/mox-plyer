@@ -2,9 +2,9 @@
 
 # 🎵 Mox-Player
 
-### A modern, animation-rich landing experience for an online music school
+### An immersive, animation-driven website for an online music school
 
-Interactive 3D visuals · scroll-driven animations · fully responsive · type-safe end to end
+3D WebGL globe · scroll-driven animations · data-driven course catalog · strict TypeScript
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-mox--plyer.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://mox-plyer.vercel.app)
 
@@ -22,96 +22,74 @@ Interactive 3D visuals · scroll-driven animations · fully responsive · type-s
 
 ## 📖 Overview
 
-**Mox-Player** is a front-end web application for a fictional online music school. It shows how a marketing site can feel like a product: 3D graphics, physics-inspired motion, and scroll-triggered storytelling, all built with a typed, component-driven architecture and deployed to production on Vercel.
+**Mox-Player** is a multi-page front-end application for a music school. It combines a real-time **3D globe**, **scroll-linked motion**, and a **JSON-driven course catalog** inside a Next.js 14 App Router project written almost entirely in TypeScript.
 
-The goal was to push past the "template landing page" and build something people remember, while keeping the codebase clean, typed, and performant.
+It was built to explore how far a marketing site can go in feeling like a product: interactive WebGL, physics-style micro-interactions, and clean component boundaries, without sacrificing performance or type safety.
 
-> 🔗 **Live:** [https://mox-plyer.vercel.app](https://mox-plyer.vercel.app)
+> 🔗 **Live demo:** [https://mox-plyer.vercel.app](https://mox-plyer.vercel.app)
 
 <!-- 📸 Add a hero screenshot or GIF here (recommended: 1200×630) -->
-<!-- ![Mox-Player Preview](./public/preview.png) -->
+<!-- ![Mox-Player Preview](./docs/preview.png) -->
 
 ---
 
 ## ✨ Features
 
-| | Feature | Details |
-|---|---|---|
-| 🌍 | **Interactive 3D Globe** | A WebGL globe rendered with Three.js and React Three Fiber, showing the school's global presence |
-| 🎬 | **Scroll-driven animations** | Framer Motion powers scroll-linked reveals, including a laptop and keyboard showcase section |
-| 🎓 | **Course catalog** | Ten courses across guitar, piano, vocals, drums, jazz, production, songwriting and more, rendered from structured data |
-| 💬 | **Testimonials carousel** | Animated student testimonials with continuous motion |
-| 👥 | **Instructor showcase** | Hoverable instructor cards with smooth micro-interactions |
-| 📨 | **Contact page** | Dedicated route for enquiries |
-| 📱 | **Fully responsive** | Mobile-first layout built with Tailwind CSS utilities |
-| ⚡ | **Optimized assets** | `next/image` for responsive, lazy-loaded images and `next/font` for font loading |
+### 🌍 Interactive 3D Globe
+- Rendered in real time with **Three.js**, **React Three Fiber** and **three-globe**
+- Country polygons drawn from a **GeoJSON dataset**, with animated **arcs and ripple rings** connecting world cities
+- Auto-rotating, atmosphere-lit, configurable through a fully typed `GlobeConfig`
+- Loaded with `next/dynamic` and `ssr: false`, so WebGL code never runs on the server and stays out of the initial render path
+- Paired with an animated headline that cycles through the countries the school serves
+
+### 🎬 Motion & Interaction
+- **Hero section** with a spotlight effect, flip-word text animation and an animated-border CTA
+- **Scroll-driven laptop showcase** using Framer Motion scroll transforms
+- **3D tilt cards** on the course catalog, reacting to the cursor in real time
+- **Infinite-scrolling testimonial carousel**
+- **Instructor section** with a simplex-noise **wavy canvas background** and hover tooltips
+- **Aurora gradient background** on the contact page
+- **Floating pill navbar** with animated hover dropdowns
+
+### 🎓 Data-Driven Course Catalog
+- Ten courses defined in a single `music.json` source (title, slug, price, instructor, featured flag, image)
+- Featured courses on the home page are derived by filtering on `isFeatured`, with no hard-coded lists in the UI
+- Full catalog page that renders directly from the same data, with a live course count
+
+### 📨 Contact Page
+- Controlled React form with typed event handlers and native validation (`required`, `type="email"`)
+
+### 🎨 Design System
+- Dark-mode-first theme
+- Custom Tailwind plugins for **color CSS variables** and **SVG grid and dot background patterns**
+- `cn()` utility (`clsx` + `tailwind-merge`) for safe, conflict-free class composition
 
 ---
 
 ## 🧰 Tech Stack
 
-**Framework & Language**
-- [Next.js 14](https://nextjs.org/) (App Router), for routing, SSR/SSG and image optimization
-- [React 18](https://react.dev/) and [TypeScript](https://www.typescriptlang.org/), with TypeScript making up about 99% of the codebase
-
-**Styling & UI**
-- [Tailwind CSS 3](https://tailwindcss.com/) with PostCSS
-- `clsx` and `tailwind-merge` for conflict-safe conditional class composition
-- [Tabler Icons](https://tabler.io/icons) and Emotion
-
-**3D & Animation**
-- [Three.js](https://threejs.org/), [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) and [Drei](https://github.com/pmndrs/drei) for declarative WebGL
-- [three-globe](https://github.com/vasturiano/three-globe) for the geospatial globe
-- [Framer Motion](https://www.framer.com/motion/) for gesture and scroll-based animation
-- `simplex-noise` for procedural noise-driven visuals
-
-**Tooling & Deployment**
-- ESLint (`eslint-config-next`), strict TypeScript config
-- Continuous deployment on [Vercel](https://vercel.com/)
-
----
-
-## 🏗️ Architecture Highlights
-
-- **App Router structure**: file-based routes for Home (`/`), Courses (`/courses`) and Contact (`/contact`).
-- **Component-driven UI**: reusable, typed components for the globe, animated cards, testimonials and layout sections.
-- **Declarative 3D**: WebGL scenes are composed as React components through React Three Fiber, so 3D code stays in the same mental model as the rest of the UI.
-- **Utility-first styling**: Tailwind plus a `cn()`-style helper (`clsx` + `tailwind-merge`) keeps styles predictable and free of class conflicts.
-- **Performance-minded**: optimized images, font subsetting through `next/font`, and Next.js automatic code splitting.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- **Node.js** 18.17 or later
-- **npm**, **yarn**, **pnpm** or **bun**
-
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/Anshrastogi05/mox-plyer.git
-cd mox-plyer
-
-# 2. Install dependencies
-npm install
-
-# 3. Start the development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Available Scripts
-
-| Command | Description |
+| Layer | Technologies |
 |---|---|
-| `npm run dev` | Start the development server with hot reload |
-| `npm run build` | Create an optimized production build |
-| `npm run start` | Serve the production build |
-| `npm run lint` | Run ESLint across the project |
+| **Framework** | Next.js 14 (App Router), React 18 |
+| **Language** | TypeScript (`strict` mode), about 99% of the codebase |
+| **Styling** | Tailwind CSS 3, PostCSS, `clsx`, `tailwind-merge` |
+| **3D / WebGL** | Three.js, React Three Fiber, Drei, three-globe |
+| **Animation** | Framer Motion, `simplex-noise` |
+| **Icons** | Tabler Icons |
+| **Quality** | ESLint (`eslint-config-next`) |
+| **Deployment** | Vercel |
+
+---
+
+## 🏗️ Architecture & Engineering Decisions
+
+- **App Router with clear route boundaries.** `/`, `/courses` and `/contact` live under `src/app/`. Pages that need no interactivity stay as server components; only interactive pieces opt into `"use client"`.
+- **WebGL isolated from SSR.** The globe is dynamically imported with SSR disabled, which avoids hydration errors from browser-only APIs and keeps heavy 3D dependencies off the critical path.
+- **Single source of truth for content.** Course data lives in `src/data/music.json` and is consumed by both the featured section and the catalog page through a typed `Course` interface.
+- **Typed 3D configuration.** The globe exposes `GlobeConfig` and `Position` types, so scene parameters (colors, lighting, arc timing, rotation) are validated at compile time.
+- **Reusable UI primitives.** Animation and layout building blocks live in `src/components/ui/`, separate from page-level composition components, which keeps the section components short and readable.
+- **Path aliases.** `@/*` maps to `src/*` for clean, refactor-friendly imports.
+- **Optimized media.** `next/image` for responsive, lazy-loaded imagery and `next/font` for Inter.
 
 ---
 
@@ -119,47 +97,91 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```
 mox-plyer/
-├── public/              # Static assets (course and instructor imagery)
-├── src/                 # Application source (routes, components, utilities)
-├── next.config.mjs      # Next.js configuration
-├── tailwind.config.ts   # Tailwind theme and content configuration
-├── postcss.config.mjs   # PostCSS pipeline
-├── tsconfig.json        # TypeScript configuration
-└── .eslintrc.json       # Linting rules
+├── public/
+│   └── courses/                 # Course and instructor imagery
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx           # Root layout, global navbar, dark theme
+│   │   ├── page.tsx             # Home: composes all landing sections
+│   │   ├── courses/page.tsx     # Full course catalog
+│   │   ├── contact/page.tsx     # Contact form
+│   │   └── globals.css
+│   ├── components/
+│   │   ├── HeroSection.tsx
+│   │   ├── Globe.tsx            # Globe config, arcs and country cycling
+│   │   ├── FeaturedCourses.tsx
+│   │   ├── macbookScroll.tsx
+│   │   ├── TestimonialCard.tsx
+│   │   ├── Instructors.tsx
+│   │   ├── Footer.tsx
+│   │   ├── navbar.tsx
+│   │   └── ui/                  # Reusable animated primitives
+│   │       ├── globe.tsx        # Three.js / three-globe renderer
+│   │       ├── 3d-card.tsx
+│   │       ├── macbook-scroll.tsx
+│   │       ├── infinite-moving-cards.tsx
+│   │       ├── wavy-background.tsx
+│   │       ├── aurora-background.tsx
+│   │       └── ...
+│   ├── data/
+│   │   ├── music.json           # Course catalog
+│   │   └── globe.json           # GeoJSON country geometry
+│   └── utils/cn.ts              # Class-name helper
+├── tailwind.config.ts           # Custom plugins (color vars, SVG patterns)
+├── tsconfig.json                # Strict TS + path aliases
+└── next.config.mjs
 ```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js** 18.17+
+- npm, yarn, pnpm or bun
+
+### Run locally
+
+```bash
+# Clone the repository
+git clone https://github.com/Anshrastogi05/mox-plyer.git
+cd mox-plyer
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server with hot reload |
+| `npm run build` | Create an optimized production build |
+| `npm run start` | Run the production build |
+| `npm run lint` | Lint the codebase with ESLint |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [ ] Dynamic course detail pages (`/courses/[slug]`)
-- [ ] Authentication and student sign-up flow
-- [ ] Working contact form with backend or email-service integration
-- [ ] CMS-backed course data
-- [ ] Payments and enrollment
-- [ ] Unit and end-to-end tests (Jest and Playwright)
-- [ ] Accessibility audit and Lighthouse optimization pass
+- [ ] Dynamic course detail pages at `/courses/[slug]` (slugs already exist in the data model)
+- [ ] Persist contact form submissions (API route plus email service or database)
+- [ ] Authentication and student enrollment flow
+- [ ] SEO: page-level metadata, Open Graph tags and sitemap
+- [ ] Accessibility pass (reduced-motion support, keyboard navigation, ARIA labels)
+- [ ] Automated tests (Jest and React Testing Library, Playwright for end-to-end)
+- [ ] Move course data to a headless CMS or database
 
 ---
 
-## 💡 What I Learned
+## 🙏 Acknowledgements
 
-- Integrating **WebGL and Three.js** into a React and Next.js app without hurting performance or SSR compatibility
-- Designing **scroll-linked animations** that feel smooth and stay accessible
-- Structuring a **typed, scalable Next.js App Router** project
-- Shipping and iterating on a production app through **Vercel's CI/CD**
-
----
-
-## 🤝 Contributing
-
-Contributions, issues and feature requests are welcome. Feel free to open an [issue](https://github.com/Anshrastogi05/mox-plyer/issues) or submit a pull request.
-
-1. Fork the project
-2. Create your feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m "Add amazing feature"`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a pull request
+Several animated UI primitives in `src/components/ui/` are adapted from [Aceternity UI](https://ui.aceternity.com/) and customized for this project. Built on the shoulders of [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/), [three-globe](https://github.com/vasturiano/three-globe) and [Framer Motion](https://www.framer.com/motion/).
 
 ---
 
@@ -168,7 +190,8 @@ Contributions, issues and feature requests are welcome. Feel free to open an [is
 **Ansh Rastogi**
 
 - GitHub: [@Anshrastogi05](https://github.com/Anshrastogi05)
-
+- LinkedIn: _add your link here_
+- Portfolio: _add your link here_
 
 ---
 
